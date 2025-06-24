@@ -1,8 +1,26 @@
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
+import { prisma } from "../utilis/db"
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
+import BlogpostCard from "@/components/general/BlogpostCard";
+async function getData (userId: string) {
+    const data= await prisma.blogPost.findMany({
+     where:{
+        authorId:userId
 
-export default function Dashboard(){
- 
+     },
+     orderBy:{
+        createdAt:'desc'
+     }  
+    });
+    return data
+    
+}
+
+export default  async function Dashboard(){
+ const {getUser}=getKindeServerSession();
+ const user=  await getUser()
+ const data= await getData(user.id)
     return (
         <div >
             <div className="flex items-center justify-between mb-8">
@@ -11,6 +29,11 @@ export default function Dashboard(){
         Create Blog
         </Link>
             </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+            {data.map((item)=>(
+              <BlogpostCard data={item} key={item.id} />
+            ))}
+            </div>  
         </div>
 
     )
