@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import Sumbitbutton from "@/components/general/Sumbitbutton";
 
 export default async function CreateBlogPost() {
   const { getUser } = getKindeServerSession();
@@ -38,8 +39,7 @@ export default async function CreateBlogPost() {
               <Label>Image Url</Label>
               <Input name="url" required type="url" placeholder="Image URL" />
             </div>
-
-            <Button type="submit">Create Post</Button>
+        <Sumbitbutton />
           </form>
         </CardContent>
       </Card>

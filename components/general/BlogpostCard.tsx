@@ -14,8 +14,17 @@ interface IAppProps {
     updatedAt: Date;
   };
 }
+;
 
 export default function BlogpostCard({ data }: IAppProps) {
+  const formattedDate = new Date(data.createdAt).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+})
+  
+  
+  
   return (
     <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all hover:shadow-lg">
       <Link href={`/post/${data.id}`} className="block w-full h-full">
@@ -33,8 +42,9 @@ export default function BlogpostCard({ data }: IAppProps) {
           <p className="mb-4 text-sm text-gray-600 line-clamp-3">{data.content}</p>
         </div>
         <div className="flex items-center justify-between">
-    <div className="flex items-center space-x-2">
-    
+    <div className="flex items-center space-x-2 p-4">
+      <p className="text-xl text-gray-600">{data.authorName}</p>
+      <p className="text-gray-600">Posted on {formattedDate}</p>
     </div>
         </div>
       </Link>

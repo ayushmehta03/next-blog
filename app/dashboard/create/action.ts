@@ -8,7 +8,9 @@ export default async function handleSubmission(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  console.log("🧪 Kinde user in server action:", user);
+  if(!user){
+    redirect("/api/auth/register")
+  }
 
   if (!user?.id || !user?.given_name) {
     throw new Error("User info missing from session");

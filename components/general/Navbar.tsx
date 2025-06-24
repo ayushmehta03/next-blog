@@ -3,7 +3,6 @@ import {  buttonVariants } from "../ui/button";
 import { ModeToggle } from "../ui/ModeToggle";;
  import {LoginLink,LogoutLink,RegisterLink}from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Divide } from "lucide-react";
 
 export default async function Navbar(){
     const {getUser}= getKindeServerSession();
